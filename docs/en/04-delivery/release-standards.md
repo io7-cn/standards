@@ -1,0 +1,22 @@
+# 09. Versioning and Release
+
+[Standards index](../README.md) · [简体中文](../../zh-CN/04-delivery/release-standards.md) · [P0](../../glossary.md#priority)
+
+
+**Scope and owner:** Public packages, applications, services and independently released components. A designated release owner coordinates compatibility, publishing and recovery.
+
+## Standards
+
+- **REL-01 MUST** define each product's public compatibility surface and version source of truth. Use [SemVer 2.0.0](../../glossary.md#semver) for versioned [public contracts](../../glossary.md#contract): patch for compatible fixes, minor for compatible features and public [API](../../glossary.md#api) [deprecations](../../glossary.md#deprecation), major for incompatible public changes after 1.0. Document compatibility for `0.y.z`; use identifiers such as `1.5.0-rc.1` for [prereleases](../../glossary.md#release-candidate). An internal continuous-delivery service may use a documented [SHA](../../glossary.md#sha)/[digest](../../glossary.md#digest) release identifier while versioning any published contract separately.
+- **REL-02 MUST** synchronize versions in affected manifests, locks and docs. Use protected signed annotated Git tags such as `v1.4.0`, `v1.5.0-rc.1` and `v1.4.1` on verified protected history. A multi-component repository may document namespaced tags, e.g. `sdk/v1.4.0`. Never move a published tag or replace [artifacts](../../glossary.md#artifact) under a published version; issue a new version.
+- **REL-03 MUST** maintain a user-facing [changelog](../../glossary.md#release-notes-and-changelog) or equivalent ordered release history. [Release notes](../../glossary.md#release-notes-and-changelog) include version/date, change highlights, fixes, security impact where disclosure permits, breaking/[deprecated](../../glossary.md#deprecation) behavior, config and [data migrations](../../glossary.md#migration), known issues and upgrade/recovery steps. Link issues, [source SHA](../../glossary.md#sha), [immutable artifacts](../../glossary.md#artifact), [pipeline](../../glossary.md#pipeline) and verification.
+- **REL-04 MUST** verify compatibility with currently deployed clients, config and [schema](../../glossary.md#schema). For mixed-version [rollout](../../glossary.md#rollout), record the compatibility matrix and ordering. Define [rollback](../../glossary.md#rollback) triggers, owner, known good revisions and data recovery plan before production changes; rehearse destructive or irreversible steps.
+- **REL-05 MUST** publish only verified inputs through authorized [CI](../../glossary.md#ci-cd) and [environment promotion](cicd-standards.md). A patch [hotfix](../../glossary.md#hotfix) follows the same immutable publication rules; expedite review and [backport](../../glossary.md#backport-and-forward-port)/[forward-port](../../glossary.md#backport-and-forward-port) as needed. Do not repair a bad release by republishing it in place.
+
+## Procedure: prepare, release, recover
+
+1. Select affected components, bump versions and draft the [release record](../templates/release/Release.md). Review [release notes](../../glossary.md#release-notes-and-changelog), dependency compatibility, [migration](../../glossary.md#migration), config, [deprecation](../../glossary.md#deprecation) and recovery.
+2. Verify the candidate and publish once from the authorized [ref](../../glossary.md#ref). Use the release asset [digest](../../glossary.md#digest)/[checksum](../../glossary.md#digest) as the [promotion](../../glossary.md#promotion) key. Confirm package/install instructions and record actual production state after [smoke checks](../../glossary.md#smoke-test).
+3. If criteria fail, stop [promotion](../../glossary.md#promotion) and use the documented compatible prior version or [forward fix](../../glossary.md#roll-forward). Reconcile [desired state](../../glossary.md#desired-state), verify real traffic and data, log the decision, and mark the bad release as affected or withdrawn where supported. Do not [revert](../../glossary.md#revert) a [data migration](../../glossary.md#migration) blindly.
+
+**Evidence:** Approved release record, [protected ref](../../glossary.md#ref) and signed tag where applicable, [release notes](../../glossary.md#release-notes-and-changelog), source/[pipeline](../../glossary.md#pipeline)/[artifact](../../glossary.md#artifact) identities, [smoke](../../glossary.md#smoke-test) and recovery results. See [API and data](../02-development/api-data-standards.md) and [deprecation](../05-maintenance/maintenance-standards.md).

@@ -1,0 +1,27 @@
+# Enforcement matrix
+
+[Standards index](README.md) · [简体中文](../zh-CN/enforcement.md) · [Platform examples](01-governance/platform-examples.md)
+
+Start with these controls and record the actual configuration in the adopting repository. Where plan/version limitations apply, record an equivalent control as described in [review](01-governance/review-standards.md). A local hook cannot be the only enforcement.
+
+| Rule | Gate and owner | Prove it works |
+| --- | --- | --- |
+| REP-04, COD-01 | [CI](../glossary.md#ci-cd) checks the checked-in [formatter](../glossary.md#formatter), [linter](../glossary.md#lint) and settings; component owner | A [change request](../glossary.md#change-request) with incorrect formatting fails the [required check](../glossary.md#gate). |
+| GIT-01, GIT-03 | [Protected branch](../glossary.md#protected-branch) rules and server-side or required [CI](../glossary.md#ci-cd) branch-name checks; maintainer | A regular developer cannot push directly or [force-push](../glossary.md#force-push) to the [protected branch](../glossary.md#protected-branch); an invalid topic name is rejected. |
+| COM-04 | Commitlint or equivalent on the retained range; controlled [squash message](../glossary.md#squash) or merge service; maintainer | An invalid final subject is rejected, including a modified [squash message](../glossary.md#squash). |
+| REV-02–04 | Require passing [pipelines](../glossary.md#pipeline), resolved discussions and approvals; use [ownership rules](../glossary.md#ownership) and restricted merge permissions; maintainer | Self-approval, [stale approval](../glossary.md#stale-approval), a failed/missing [pipeline](../glossary.md#pipeline) and an unresolved blocking discussion each prevent merge. |
+| TST-03 | [Required jobs](../glossary.md#gate) for [lint](../glossary.md#lint), build and applicable test types; publish reports; [CI](../glossary.md#ci-cd) owner | A failing test blocks merge and its report remains visible. Test path filters with a shared dependency change. |
+| SEC-01, SEC-03–04 | [Secret detection](../glossary.md#secret-detection), [SAST](../glossary.md#sast), dependency and image scans, [SBOM](../glossary.md#sbom) and [provenance](../glossary.md#provenance) verification; security owner | A synthetic test finding blocks its gate. An untrusted [change request](../glossary.md#change-request) cannot read protected secrets. |
+| CIC-03–07 | [Registry](../glossary.md#registry) immutability or [digest](../glossary.md#digest) addressing, restricted environment access, serial deployment and post-deploy jobs; operations owner | An unauthorized deploy and stale [promotion](../glossary.md#promotion) fail; the actual [artifact](../glossary.md#artifact) [digest](../glossary.md#digest) and [smoke results](../glossary.md#smoke-test) are recorded. |
+| REL-02, REL-05 | Protected tags, signature verification and scoped publishing job; release owner | An unsigned/unauthorized tag and a conflicting existing version cannot publish. |
+| [API](../glossary.md#api)-01, DAT-02 | [Schema](../glossary.md#schema)/contract diff and [migration](../glossary.md#migration) rehearsal in [CI](../glossary.md#ci-cd) when applicable; contract/data owner | A breaking [schema](../glossary.md#schema) change or unsafe [migration](../glossary.md#migration) fails against representative consumers or data. |
+| MNT-01 | Markdown/link checks and [change request](../glossary.md#change-request) documentation field; docs owner | A broken relative link fails [CI](../glossary.md#ci-cd) and required docs changes are reviewed. |
+| [MNT-07](05-maintenance/maintenance-standards.md#explain-engineering-terminology) | Reviewers check that terms are explained in context. Validate glossary anchors automatically. | A reviewer can follow a term to the correct entry and understand it in either language. |
+| [MNT-08](05-maintenance/maintenance-standards.md#maintain-separate-language-editions) | Check language pairs and links. Review `AGENTS.md` and both editions of changed docs. | Each edition links to its counterpart, and the English-only `AGENTS.md` opens the English entry point. |
+| [REP-07](01-governance/repository-standards.md) | Check the recorded [submodule](../glossary.md#git-submodule) commit, initialized checkout and English agent entry; repository maintainer | A missing, dirty or mismatched standards checkout fails verification. Updates change the parent repository’s recorded commit and are reviewed. |
+
+## Wiring order
+
+1. Configure [CI](../glossary.md#ci-cd) triggers for [change requests](../glossary.md#change-request), the [default branch](../glossary.md#branch), protected release tags and downstream workflows as applicable. Use repository scripts for the same check entry points locally and in [CI](../glossary.md#ci-cd). Verify that missing [required jobs](../glossary.md#gate) cannot leave the [change request](../glossary.md#change-request) mergeable.
+2. Configure server-side branch, tag, approval and environment controls. Check overlapping rules and test them using ordinary developer privileges. Protect shared [CI](../glossary.md#ci-cd) configuration and environment permissions as high-risk changes.
+3. Run negative checks in a test repository or non-production environment using synthetic inputs. Record evidence and check again after changes to platform features, group policies or access to [CI executors](../glossary.md#runner).

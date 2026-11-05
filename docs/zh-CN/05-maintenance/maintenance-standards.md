@@ -1,0 +1,33 @@
+# 12. 文档与维护规范
+
+[规范目录](../README.md) · [English](../../en/05-maintenance/maintenance-standards.md) · [P1](../../glossary.md#priority)
+
+
+**适用范围与责任人：** 文档、运维准备、故障、[弃用](../../glossary.md#deprecation)和[技术债](../../glossary.md#technical-debt)。仓库与服务所有者维护长期文档；指挥人指定前由[值班人员](../../glossary.md#on-call)协调故障。
+
+## 规范
+
+- **MNT-01 MUST（必须）** 公共接口、架构行为、配置、部署或运维变化时，在同一变更更新受影响文档。保持 [README](../../glossary.md#readme)、开发环境搭建、架构图、[API](../../glossary.md#api) 参考及 [Runbook](../../glossary.md#runbook) 易于找到。运维文档标明负责人及审查日期，实质变更后检查链接和命令。发布前移除示例、日志及截图里的本机路径、非公开仓库或服务标识及敏感内容；使用仓库相对链接和虚构示例。
+- **MNT-02 SHOULD（推荐）** 重大跨组件、兼容性或运维决策记录为 [ADR](../../glossary.md#adr)，包含背景、选项、决策、后果、状态和替代关系。长期指令放入持续维护的文档；临时排查与交接记录通过链接保留。
+- **MNT-03 MUST（必须）** 为关键服务提供 [Runbook](../../glossary.md#runbook)：联系与升级、告警与仪表盘、[健康检查](../../glossary.md#health-and-readiness)、安全诊断、缓解／[回滚](../../glossary.md#rollback)、备份恢复及验证。明确服务指标与告警所有者，示例不含真实[凭据](../../glossary.md#secret)。
+- **MNT-04 MUST（必须）** 指定[故障指挥人](../../glossary.md#incident-commander)或责任[值班人员](../../glossary.md#on-call)，记录[严重度](../../glossary.md#priority)、影响和时间线，优先止损与恢复，经批准的渠道通报进度。关闭前验证用户可见恢复及数据完整性。重大故障执行[非追责复盘](../../glossary.md#incident-review)，记录促成因素、检测缺口、行动项、负责人和期限。
+- **MNT-05 MUST（必须）** [弃用](../../glossary.md#deprecation)公告说明受影响版本与用户、替代方案、迁移步骤、通知窗口和最早移除日期。责任人按支持承诺记录合理窗口，监测用量并与消费方协调。通知期结束且通过准备检查后才能移除；记录延期或紧急例外。
+- **MNT-06 SHOULD（推荐）** 以[工作项](../../glossary.md#issue)跟踪[技术债](../../glossary.md#technical-debt)的影响、风险、责任人与建议修复。定期复查，优先处理阻碍稳定性或交付的问题，延期写明原因。交接包含未解决风险、运维职责及证据位置。
+
+## 解释工程术语
+
+- **MNT-07 MUST（必须）** 解释工程文档中使用的[行话](../../glossary.md#jargon)、专业术语和缩写，规范与模板也适用。意思同样准确时，优先使用通俗表达。确有必要使用术语时，将正文中的术语直接链接到对应词条。读者需要借助解释才能理解正文时，首次出现应给出全称或简短释义。在同一变更中新增或更新中英文解释。审查人核对释义是否符合上下文，并确认链接能跳到正确词条。保留命令、原样示例和机器可读标识的写法。
+
+例如，面向不熟悉该术语的读者，首次使用时写成“[ADR](../../glossary.md#adr)（架构决策记录）”。
+
+## 分开维护中英文文档
+
+- **MNT-08 MUST（必须）** 项目文档须提供英文和简体中文版本，分别在 `docs/en/` 和 `docs/zh-CN/` 下维护独立文件。两版使用相同文件名，直接互相链接，并在同一变更中同步更新。`AGENTS.md` 只使用英文，直接链接到 `docs/en/` 下的英文文档入口。
+
+## 流程
+
+1. **架构变更：** 用[模板](../templates/maintenance/ADR.md)起草 [ADR](../../glossary.md#adr)，请受影响所有者审查，再从架构目录及[变更请求](../../glossary.md#change-request)关联。
+2. **故障：** [分诊](../../glossary.md#triage) → 指定指挥 → 止损 → 恢复 → 验证 → 复盘。使用[故障复盘模板](../templates/maintenance/Incident-review.md)，为改进措施建[工作项](../../glossary.md#issue)并核验结果。敏感故障走受限[安全流程](../03-quality/security-standards.md)。
+3. **退役：** 盘点消费方 → 发公告 → 提供迁移方式及兼容窗口 → 观察采用情况 → 批准移除 → 更新契约、仪表盘及 [Runbook](../../glossary.md#runbook) → 验证无残留依赖。关联[发布说明](../../glossary.md#release-notes-and-changelog)和迁移[工作项](../../glossary.md#issue)。
+
+**验收证据：** 版本化文档、[ADR](../../glossary.md#adr) 决策及替代链接、[Runbook](../../glossary.md#runbook) 和恢复验证、故障时间线与行动项、[弃用](../../glossary.md#deprecation)公告和消费方准备证据。
