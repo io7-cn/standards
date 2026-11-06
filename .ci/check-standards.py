@@ -82,6 +82,18 @@ def main():
     if "docs/en/README.md" not in LINK.findall(contents.get(Path("AGENTS.md"), "")):
         errors.append("AGENTS.md: missing direct link to docs/en/README.md")
 
+    branching = "docs/en/02-development/git-branching.md"
+    if branching not in LINK.findall(contents.get(Path("AGENTS.md"), "")):
+        errors.append("AGENTS.md: missing direct link to the English Git branching standards")
+    template = ROOT / "templates/repository/AGENTS.md"
+    try:
+        template_body = template.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        errors.append(f"AGENTS.md template: {exc}")
+    else:
+        if ".standards/" + branching not in LINK.findall(template_body):
+            errors.append("AGENTS.md template: missing direct English Git branching link")
+
     for edition in EDITIONS:
         index = contents.get(Path(edition) / "README.md", "")
         indexed = set(LINK.findall(index))
