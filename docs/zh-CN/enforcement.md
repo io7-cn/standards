@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | REP-04、COD-01 | [CI](../glossary.md#ci-cd) 使用入库的[格式化器](../glossary.md#formatter)、[Lint](../glossary.md#lint) 和设置；组件所有者负责 | 故意提交格式错误，确认[必过检查](../glossary.md#gate)失败。 |
 | GIT-01、GIT-03 | [分支保护](../glossary.md#protected-branch)规则及服务端或必过 [CI](../glossary.md#ci-cd) 分支命名检查；[维护者](../glossary.md#ownership)负责 | 普通开发者无法直接推送或[强推](../glossary.md#force-push)到[保护分支](../glossary.md#protected-branch)；不合规[工作分支](../glossary.md#topic-branch)名被拒绝。 |
+| [GIT-06](02-development/git-branching.md) | 规范／接入 CI 检查根目录 AGENTS.md 及其英文分支规范直接链接；维护者负责 | 删除分支链接时检查失败；审查确认明确写出工作分支与保护分支要求。 |
 | COM-04 | Commitlint 或等效工具检查保留的提交；受控 [squash](../glossary.md#squash) 消息或合并服务；[维护者](../glossary.md#ownership)负责 | 无效最终主题被拒绝，包含手工修改的 [squash](../glossary.md#squash) 消息。 |
 | REV-02–04 | 要求[流水线](../glossary.md#pipeline)通过、讨论解决和审批；使用[所有权规则](../glossary.md#ownership)并限制合并权限；[维护者](../glossary.md#ownership)负责 | 自审、[审批失效](../glossary.md#stale-approval)、[流水线](../glossary.md#pipeline)失败／缺失、阻塞讨论未解决都无法合并。 |
 | TST-03 | [Lint](../glossary.md#lint)、构建及适用测试设为[必过作业](../glossary.md#gate)，并发布报告；[CI](../glossary.md#ci-cd) 负责人负责 | 测试失败阻止合并，报告仍可见。用共享依赖改动验证路径过滤。 |
@@ -18,6 +19,7 @@
 | MNT-01 | Markdown／链接检查及 [变更请求](../glossary.md#change-request)的文档字段；文档所有者负责 | 失效相对链接使 [CI](../glossary.md#ci-cd) 失败，所需文档更新纳入审查。 |
 | [MNT-07](05-maintenance/maintenance-standards.md#解释工程术语) | 审查人核对术语在当前语境中是否得到解释，并用自动化检查验证术语锚点。 | 审查人可以从术语跳到正确词条，并通过任一语言的释义理解该术语。 |
 | [MNT-08](05-maintenance/maintenance-standards.md#分开维护中英文文档) | 检查文档配对和链接，审查 `AGENTS.md` 及受影响文档的两种版本。 | 两种版本互相链接，纯英文的 `AGENTS.md` 直接打开英文文档入口。 |
+| [MNT-09](05-maintenance/maintenance-standards.md#验收记录不进入源码仓库) | 审查仓库文件及暂存变更；文档与 CI 所有者在外部保留执行证据 | 源码版本控制中没有验收日志与逐次验收历史；相关变更请求关联可访问且设置了适当保留期限的证据。 |
 | [REP-07](01-governance/repository-standards.md) | 检查记录的[子模块](../glossary.md#git-submodule)提交、初始化检出与英文智能体入口；仓库维护者 | 规范检出缺失、有未提交修改或提交不匹配时验证失败；升级须改变父仓库记录的提交并经过审查。 |
 
 ## 配置顺序

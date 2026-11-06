@@ -46,6 +46,8 @@ def verify(parent):
     agent = (parent / "AGENTS.md").read_text(encoding="utf-8-sig")
     if ".standards/docs/en/README.md" not in LINK.findall(agent):
         raise ValueError("AGENTS.md must directly link the adopted English standards.")
+    if ".standards/docs/en/02-development/git-branching.md" not in LINK.findall(agent):
+        raise ValueError("AGENTS.md must directly link the English Git branching standards.")
     for edition in ("en", "zh-CN"):
         source = parent / "docs" / edition / "README.md"
         target = f"../../.standards/docs/{edition}/README.md"
