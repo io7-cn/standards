@@ -19,7 +19,7 @@
 | MNT-01 | Markdown／链接检查及 [变更请求](../glossary.md#change-request)的文档字段；文档所有者负责 | 失效相对链接使 [CI](../glossary.md#ci-cd) 失败，所需文档更新纳入审查。 |
 | [MNT-07](05-maintenance/maintenance-standards.md#解释工程术语) | 审查人核对术语在当前语境中是否得到解释，并用自动化检查验证术语锚点。 | 审查人可以从术语跳到正确词条，并通过任一语言的释义理解该术语。 |
 | [MNT-08](05-maintenance/maintenance-standards.md#分开维护中英文文档) | 检查文档配对和链接，审查 `AGENTS.md` 及受影响文档的两种版本。 | 两种版本互相链接，纯英文的 `AGENTS.md` 直接打开英文文档入口。 |
-| [MNT-09](05-maintenance/maintenance-standards.md#验收记录不进入源码仓库) | 审查仓库文件及暂存变更；文档与 CI 所有者在外部保留执行证据 | 源码版本控制中没有验收日志与逐次验收历史；相关变更请求关联可访问且设置了适当保留期限的证据。 |
+| [MNT-09](05-maintenance/maintenance-standards.md#验收记录不进入源码仓库) | 审查仓库文件及暂存变更；文档与 CI 所有者在外部保留执行证据 | 版本控制中没有临时任务／验收脚本、一次性数据及单次工作证据，隐藏目录也不例外；保留的自动化有持续的项目用途、维护责任和验证，相关变更请求关联保留期限适当的外部证据。 |
 | [REP-07](01-governance/repository-standards.md) | 检查记录的[子模块](../glossary.md#git-submodule)提交、初始化检出与英文智能体入口；仓库维护者 | 规范检出缺失、有未提交修改或提交不匹配时验证失败；升级须改变父仓库记录的提交并经过审查。 |
 
 ## 配置顺序
