@@ -11,6 +11,8 @@
 | 保护发布与部署 | 用[标签](../../glossary.md#tag)规则集限制发布[标签](../../glossary.md#tag)的变动，使用[环境保护规则](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)或受控部署服务；在 [CI](../../glossary.md#ci-cd) 中验证[标签](../../glossary.md#tag)签名和[制品](../../glossary.md#artifact)身份。 | 用保护[标签](../../glossary.md#tag)限制发布[标签](../../glossary.md#tag)的创建，使用[保护环境](https://docs.gitlab.com/ci/environments/protected_environments/)或受控部署服务；在 [CI](../../glossary.md#ci-cd) 中验证[标签](../../glossary.md#tag)签名和[制品](../../glossary.md#artifact)身份。 |
 | 安装模板 | 审查模板放入 `.github/pull_request_template.md`；[工作项](../../glossary.md#issue)模板添加所需元数据后放入 `.github/ISSUE_TEMPLATE/`。参阅[模板设置](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)。 | 审查模板放入 `.gitlab/merge_request_templates/`，[工作项](../../glossary.md#issue)模板放入 `.gitlab/issue_templates/`。参阅[模板设置](https://docs.gitlab.com/user/project/description_templates/)。 |
 
+采用 AI 审批时，验证平台能够计入明确获授权的[审核身份](../../glossary.md#qualified-reviewer)对当前候选版本作出的审批决定。若平台无法直接计入，使用 [REV-04](review-standards.md) 的等效门禁。验证未获授权或已过时的审批决定不能放行。
+
 ## [CI](../../glossary.md#ci-cd) 示例：验证本套规范
 
 两个示例均用 Python 3.9 或更高版本运行同一个[检查脚本](../../../.ci/check-standards.py)。在受保护目标上要求该检查通过；确认检查缺失、跳过或失败均不能放行。拟议变更应在隔离且不具备发布或生产[凭据](../../glossary.md#secret)的执行环境中运行。

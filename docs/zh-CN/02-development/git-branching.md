@@ -7,7 +7,7 @@
 
 ## 规范
 
-- **GIT-01 MUST（必须）** 保护[默认分支](../../glossary.md#branch)以及仍在使用的发布／集成分支。普通角色不得直接推送、[强推](../../glossary.md#force-push)或删除[保护分支](../../glossary.md#protected-branch)。仅指定角色或受控合并服务可通过[变更请求](../../glossary.md#change-request)合并，并满足审批和 [CI](../../glossary.md#ci-cd) 门禁。记录平台设置或等效强制手段。
+- **GIT-01 MUST（必须）** 保护[默认分支](../../glossary.md#branch)以及仍在使用的发布／集成分支。普通角色不得直接推送、[强推](../../glossary.md#force-push)或删除[保护分支](../../glossary.md#protected-branch)。仅指定角色或受控合并服务可通过[变更请求](../../glossary.md#change-request)合并，并满足 [REV-02–04](../01-governance/review-standards.md) 和必过 [CI](../../glossary.md#ci-cd) 检查。记录平台设置或等效强制手段。
 - **GIT-02 SHOULD（推荐）** 从最新的 `main` 创建短生命周期[工作分支](../../glossary.md#topic-branch)，并合回[主干](../../glossary.md#branch)。既有 `master`、`develop` 或受支持发布分支可保留，但须记录目标分支、[晋级](../../glossary.md#promotion)、[回移植](../../glossary.md#backport-and-forward-port)与保护规则。仅因[部署环境](../../glossary.md#environment)不同，不必创建分支。
 - **GIT-03 MUST（必须）** 使用全小写连字符[工作分支](../../glossary.md#topic-branch)名，例如 `feature/123-login`、`fix/124-timeout`、`hotfix/125-auth`。也可用 `refactor/`、`docs/`、`test/`、`chore/` 和 `spike/`；已记录的既有别名（如 `feat/`）有效。可行时包含[工作项](../../glossary.md#issue)编号，每个分支只服务一个目的。
 - **GIT-04 SHOULD（推荐）** 普通[变更请求](../../glossary.md#change-request)压缩成一条符合 [Conventional Commits](../../glossary.md#conventional-commits) 的提交。独立提交有保留价值、集成分支合并或[回移植](../../glossary.md#backport-and-forward-port)需要保留祖先关系时，可用[合并提交](../../glossary.md#merge-commit)，并在仓库细则记录策略。可以 [rebase](../../glossary.md#rebase) 私有分支；改写共享历史须先协调。对约定的[工作分支](../../glossary.md#topic-branch)，核对远端末端后使用 [`--force-with-lease`](../../glossary.md#force-push)；日常工作不得改写[保护分支](../../glossary.md#protected-branch)。

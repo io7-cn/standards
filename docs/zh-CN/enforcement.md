@@ -10,7 +10,7 @@
 | GIT-01、GIT-03 | [分支保护](../glossary.md#protected-branch)规则及服务端或必过 [CI](../glossary.md#ci-cd) 分支命名检查；[维护者](../glossary.md#ownership)负责 | 普通开发者无法直接推送或[强推](../glossary.md#force-push)到[保护分支](../glossary.md#protected-branch)；不合规[工作分支](../glossary.md#topic-branch)名被拒绝。 |
 | [GIT-06](02-development/git-branching.md) | 规范／接入 CI 检查根目录 AGENTS.md 及其英文分支规范直接链接；维护者负责 | 删除分支链接时检查失败；审查确认明确写出工作分支与保护分支要求。 |
 | COM-04 | Commitlint 或等效工具检查保留的提交；受控 [squash](../glossary.md#squash) 消息或合并服务；[维护者](../glossary.md#ownership)负责 | 无效最终主题被拒绝，包含手工修改的 [squash](../glossary.md#squash) 消息。 |
-| REV-02–04 | 要求[流水线](../glossary.md#pipeline)通过、讨论解决和审批；使用[所有权规则](../glossary.md#ownership)并限制合并权限；[维护者](../glossary.md#ownership)负责 | 自审、[审批失效](../glossary.md#stale-approval)、[流水线](../glossary.md#pipeline)失败／缺失、阻塞讨论未解决都无法合并。 |
+| [REV-02–04](01-governance/review-standards.md) | 核验有写权限人员的合并决定，以及另一个独立[合格审核主体](../glossary.md#qualified-reviewer)对当前候选版本的批准。要求[流水线](../glossary.md#pipeline)通过、讨论解决、适用的[所有者](../glossary.md#ownership)审批及受限的合并权限。维护者负责门禁。 | 合格人员或获授权的 AI Agent 可满足独立审核门禁。自审、审核主体未获授权、[审批失效](../glossary.md#stale-approval)、检查失败或缺失、阻塞讨论未解决均阻止合并。 |
 | TST-03 | [Lint](../glossary.md#lint)、构建及适用测试设为[必过作业](../glossary.md#gate)，并发布报告；[CI](../glossary.md#ci-cd) 负责人负责 | 测试失败阻止合并，报告仍可见。用共享依赖改动验证路径过滤。 |
 | SEC-01、SEC-03–04 | 密钥检测、[SAST](../glossary.md#sast)、依赖／镜像扫描、[SBOM](../glossary.md#sbom) 和来源校验；安全负责人负责 | 合成测试告警能阻断门禁；不可信[变更请求](../glossary.md#change-request) 无法读取受保护密钥。 |
 | CIC-03–07 | [制品](../glossary.md#artifact)不可变或按 [digest](../glossary.md#digest) 寻址，受限的环境访问、串行部署及部署后验证；运维负责人负责 | 未[授权](../glossary.md#authentication-and-authorization)部署与过时[晋级](../glossary.md#promotion)均失败；记录实际[制品](../glossary.md#artifact) [digest](../glossary.md#digest) 和[冒烟结果](../glossary.md#smoke-test)。 |
