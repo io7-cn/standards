@@ -35,6 +35,8 @@ Explaining terminology is a requirement for engineering documents. See [English 
 | [Backlog](#backlog) | 待办列表 |
 | [Change request (PR / MR)](#change-request) | 变更请求 |
 | [Code review](#code-review) | 代码审查 |
+| [Qualified reviewer](#qualified-reviewer) | 合格审核主体 |
+| [AI agent](#ai-agent) | AI 智能体 |
 | [Stale approval](#stale-approval) | 过时审批 |
 | [Gate / quality gate / required check](#gate) | 门禁／质量门禁／必过检查 |
 | [Exception / waiver](#exception) | 例外／豁免 |
@@ -151,6 +153,22 @@ Explaining terminology is a requirement for engineering documents. See [English 
 **EN:** Peer examination of a proposed change and its evidence before merge. A blocking finding must be addressed or resolved through the recorded review process.
 
 **中：** 合并前由同行检查变更与证据；阻塞意见须处理或按有记录的审查流程解决。
+
+### Qualified reviewer
+
+**Qualified reviewer · 合格审核主体**
+
+**EN:** A person or review identity authorized to approve within the scope of a change. A qualified reviewer counts as independent when they did not author or contribute to the change. An eligible write-access person or an explicitly authorized AI agent can provide an approval.
+
+**中：** 在指定变更范围内有权批准的人员或审核身份。未编写或参与该改动的合格审核主体，才可计入独立审批。有审批资格的写权限人员或明确获授权的 AI 智能体均可批准。
+
+### AI agent
+
+**AI agent · AI 智能体**
+
+**EN:** Software that uses an AI model to carry out tasks using tools or repository context. It acts as an approver only under explicit, scoped authorization and uses a distinct, auditable review identity.
+
+**中：** 使用 AI 模型结合工具或仓库上下文执行任务的软件。担任审批者须取得明确且限定范围的授权，并使用独立、可审计的审核身份。
 
 ### Stale approval
 
