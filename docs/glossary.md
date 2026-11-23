@@ -35,6 +35,7 @@ Explaining terminology is a requirement for engineering documents. See [English 
 | [Backlog](#backlog) | 待办列表 |
 | [Change request (PR / MR)](#change-request) | 变更请求 |
 | [Code review](#code-review) | 代码审查 |
+| [Code review subagent](#code-review-subagent) | 代码审查子代理 |
 | [Qualified reviewer](#qualified-reviewer) | 合格审核主体 |
 | [AI agent](#ai-agent) | AI 智能体 |
 | [Stale approval](#stale-approval) | 过时审批 |
@@ -150,25 +151,33 @@ Explaining terminology is a requirement for engineering documents. See [English 
 
 **Code review · 代码审查**
 
-**EN:** Peer examination of a proposed change and its evidence before merge. A blocking finding must be addressed or resolved through the recorded review process.
+**EN:** Examination of a proposed change and its evidence by a colleague or a separately invoked review agent. Review can happen locally before submission. It produces findings for the author and maintainer to assess.
 
-**中：** 合并前由同行检查变更与证据；阻塞意见须处理或按有记录的审查流程解决。
+**中：** 由同事或单独调用的审查智能体检查拟议变更及其证据。审查可以在本地提交前进行，为作者和维护者提供待评估的意见。
+
+### Code review subagent
+
+**Code review subagent · 代码审查子代理**
+
+**EN:** A separately invoked AI agent tasked with examining a specific diff, applicable standards and relevant evidence. When it did not author the change, its findings can provide independent local code review without a separate platform account or an approving review.
+
+**中：** 单独调用并负责检查特定差异、适用规范及相关证据的 AI 智能体。未编写该变更时，其意见可作为独立本地代码审查的来源，无需独立的平台账号或提交平台批准。
 
 ### Qualified reviewer
 
 **Qualified reviewer · 合格审核主体**
 
-**EN:** A person or review identity authorized to approve within the scope of a change. A qualified reviewer counts as independent when they did not author or contribute to the change. An eligible write-access person or an explicitly authorized AI agent can provide an approval.
+**EN:** A person or agent with enough knowledge and context to assess a change. A local code review subagent can serve as an independent reviewer when it did not author the change. Repository write access and platform approval permissions are unnecessary for local review.
 
-**中：** 在指定变更范围内有权批准的人员或审核身份。未编写或参与该改动的合格审核主体，才可计入独立审批。有审批资格的写权限人员或明确获授权的 AI 智能体均可批准。
+**中：** 具备评估变更所需知识与上下文的人员或智能体。未编写该变更的本地 Code Review 子代理可提供独立审查。本地审查无需仓库写权限或平台审批权限。
 
 ### AI agent
 
 **AI agent · AI 智能体**
 
-**EN:** Software that uses an AI model to carry out tasks using tools or repository context. It acts as an approver only under explicit, scoped authorization and uses a distinct, auditable review identity.
+**EN:** Software that uses an AI model to carry out tasks using tools or repository context. It can be invoked separately for local code review and report findings. Any granted tool or repository permissions define its action scope.
 
-**中：** 使用 AI 模型结合工具或仓库上下文执行任务的软件。担任审批者须取得明确且限定范围的授权，并使用独立、可审计的审核身份。
+**中：** 使用 AI 模型结合工具或仓库上下文执行任务的软件。可单独调用其进行本地代码审查并给出意见，操作范围由获授予的工具或仓库权限决定。
 
 ### Stale approval
 

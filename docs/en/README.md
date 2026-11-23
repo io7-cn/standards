@@ -39,7 +39,7 @@ Use the [shared coding style and file organization](02-development/coding-style.
 
 ## Adoption sequence
 
-1. **Collaboration:** Choose the branch model, enforce review and commit rules, and adopt issue and [change request](../glossary.md#change-request) templates. Verify an example change from issue through merge.
+1. **Collaboration:** Choose the branch model, enforce commit rules and technical merge checks, recommend independent local review, and adopt issue and [change request](../glossary.md#change-request) templates. Verify an example change from issue through merge.
 2. **Quality and delivery:** Make [lint](../glossary.md#lint), build, tests, security and release controls required. Prove rejected and accepted paths and [promote](../glossary.md#promotion) an immutable candidate end to end.
 3. **Long-term governance:** Add contract compatibility, [migration](../glossary.md#migration) and restore exercises, operational docs, [ADRs](../glossary.md#adr), incident reviews and [deprecation](../glossary.md#deprecation) tracking. Assign owners and dates to remaining gaps.
 

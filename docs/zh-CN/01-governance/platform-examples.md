@@ -7,11 +7,11 @@
 | 目标 | GitHub 示例 | GitLab 示例 |
 | --- | --- | --- |
 | [保护分支](../../glossary.md#protected-branch) | 用[分支规则集](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)要求通过 [Pull Request](../../glossary.md#change-request)，禁止[强推](../../glossary.md#force-push)和删除，限制绕过并验证合并权限。 | 用[保护分支](https://docs.gitlab.com/user/project/repository/protect/)禁止直接推送，限制合并角色，并阻止[强推](../../glossary.md#force-push)和删除。 |
-| 要求当前版本通过审查与检查 | 要求批准及适用的[代码所有者](../../glossary.md#ownership)审查，撤销[过时审批](../../glossary.md#stale-approval)，要求讨论解决及状态检查通过。按需使用合并队列或验证当前目标分支。 | 要求审批、有效的[代码所有者](../../glossary.md#ownership)审查、讨论解决及[流水线](../../glossary.md#pipeline)成功；重置[过时审批](../../glossary.md#stale-approval)。按需使用[合并结果流水线](../../glossary.md#merge-queue)或合并队列。 |
+| 检查当前候选版本 | 必需批准数设为 0，关闭最后推送与[代码所有者](../../glossary.md#ownership)的强制批准。要求讨论解决和状态检查通过。按需使用[合并队列](../../glossary.md#merge-queue)或验证当前目标分支。 | 必需批准数设为 0 或将审批设为可选，代码所有者审批同样处理。要求讨论解决与[流水线](../../glossary.md#pipeline)成功。按需使用[合并结果流水线](../../glossary.md#merge-queue)或合并队列。 |
 | 保护发布与部署 | 用[标签](../../glossary.md#tag)规则集限制发布[标签](../../glossary.md#tag)的变动，使用[环境保护规则](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)或受控部署服务；在 [CI](../../glossary.md#ci-cd) 中验证[标签](../../glossary.md#tag)签名和[制品](../../glossary.md#artifact)身份。 | 用保护[标签](../../glossary.md#tag)限制发布[标签](../../glossary.md#tag)的创建，使用[保护环境](https://docs.gitlab.com/ci/environments/protected_environments/)或受控部署服务；在 [CI](../../glossary.md#ci-cd) 中验证[标签](../../glossary.md#tag)签名和[制品](../../glossary.md#artifact)身份。 |
 | 安装模板 | 审查模板放入 `.github/pull_request_template.md`；[工作项](../../glossary.md#issue)模板添加所需元数据后放入 `.github/ISSUE_TEMPLATE/`。参阅[模板设置](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)。 | 审查模板放入 `.gitlab/merge_request_templates/`，[工作项](../../glossary.md#issue)模板放入 `.gitlab/issue_templates/`。参阅[模板设置](https://docs.gitlab.com/user/project/description_templates/)。 |
 
-采用 AI 审批时，验证平台能够计入明确获授权的[审核身份](../../glossary.md#qualified-reviewer)对当前候选版本作出的审批决定。若平台无法直接计入，使用 [REV-04](review-standards.md) 的等效门禁。验证未获授权或已过时的审批决定不能放行。
+本地审查建议遵循 [REV-02](review-standards.md)。本地 [Code Review 子代理](../../glossary.md#code-review-subagent)可提供审查意见，无需单独的托管平台账号或审批权限。维护者结合这些意见与必过技术检查判断是否合并。
 
 ## [CI](../../glossary.md#ci-cd) 示例：验证本套规范
 

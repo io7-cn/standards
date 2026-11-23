@@ -1,6 +1,6 @@
 ## Change
 
-- [Issue](../../../glossary.md#issue) (use a close directive only if this [change request](../../../glossary.md#change-request) meets the closure condition):
+- [Issue](../../../glossary.md#issue) reference or tracker-supported closing directive under [COM-03](../../02-development/commit-convention.md) (use closure when this change completes the issue):
 - Before / after:
 - Scope and affected components:
 
@@ -20,6 +20,7 @@ Add sanitized screenshots or request/response examples where applicable. State w
 
 ## Before merge
 
-- [ ] A person with write access authorized the merge. The current candidate has the required independent [qualified approvals](../../01-governance/review-standards.md#approval-eligibility-and-evidence) and passing [required jobs](../../../glossary.md#gate).
+- [ ] An authorized maintainer confirmed merge readiness and the current candidate passed [required jobs](../../../glossary.md#gate).
+- Recommended local [review](../../01-governance/review-standards.md#approval-eligibility-and-evidence) by a colleague or Code Review subagent, findings and follow-up (state if not performed):
 - [ ] Blocking threads are resolved and the final commit message conforms.
 - [ ] Tests, contracts, docs and [rollout](../../../glossary.md#rollout) records are updated as applicable.

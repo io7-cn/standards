@@ -1,6 +1,6 @@
 ## 变更
 
-- [工作项](../../../glossary.md#issue)（仅在本[变更请求](../../../glossary.md#change-request)满足关闭条件时使用关闭指令）：
+- 按 [COM-03](../../02-development/commit-convention.md) 关联[工作项](../../../glossary.md#issue)或使用跟踪系统支持的关闭指令（变更完成该工作项时使用关闭语义）：
 - 变更前／后：
 - 范围与受影响组件：
 
@@ -20,6 +20,7 @@
 
 ## 合并前
 
-- [ ] 有写权限的人员已授权合并。当前候选版本已取得所需的[独立合格审批](../../01-governance/review-standards.md#审批资格与证据)并通过[必过作业](../../../glossary.md#gate)。
+- [ ] 获授权的维护者已确认就绪，当前候选版本已通过[必过作业](../../../glossary.md#gate)。
+- 推荐的本地[审查](../../01-governance/review-standards.md#审批资格与证据)方式（同事或 Code Review 子代理）、意见及后续处理（未执行时注明）：
 - [ ] 阻塞讨论已解决，最终[提交信息](../../../glossary.md#commit)符合规范。
 - [ ] 已按需更新测试、契约、文档与[上线](../../../glossary.md#rollout)记录。

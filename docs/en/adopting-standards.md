@@ -16,7 +16,8 @@ Add a direct English entry in AGENTS.md and links to both language editions in p
 
 ```md
 - Follow the [English development standards](.standards/docs/en/README.md).
-- Follow the [Git branching standards](.standards/docs/en/02-development/git-branching.md) before editing. Check the branch and working tree, use a compliant topic branch, and merge only through a change request with required checks and approvals. Do not edit, commit or push directly on protected branches; administrator access and passing tests do not waive this workflow.
+- Follow the [Git branching standards](.standards/docs/en/02-development/git-branching.md) before editing. Check the branch and working tree, use a compliant topic branch, and merge only through a change request with required technical checks. Do not edit, commit or push directly on protected branches; administrator access and passing tests do not waive this workflow.
+- Recommend independent local [code review](.standards/docs/en/01-governance/review-standards.md) before merge, including a separately invoked Code Review subagent that did not author the change. Give it the current diff and applicable standards, then address its findings. Platform required approvals are 0 under REV-04.
 ```
 
 Use the [English-only AGENTS.md template](../../templates/repository/AGENTS.md) as the starting point. The adoption check requires direct links to both the English entry and the Git branching module. When upgrading to this requirement, update the parent AGENTS.md in the same change as the standards pin.
