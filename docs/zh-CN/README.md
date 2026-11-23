@@ -39,7 +39,7 @@ C#、TypeScript 与 CSS 使用[统一代码写法与文件组织](02-development
 
 ## 接入顺序
 
-1. **研发协作：** 确定分支模型、强制审查与提交规则，采用[工作项](../glossary.md#issue)与[变更请求](../glossary.md#change-request)模板。选择一项变更验证从[工作项](../glossary.md#issue)到合并的流程。
+1. **研发协作：** 确定分支模型、提交规则和技术合并检查，推荐独立本地审查，采用[工作项](../glossary.md#issue)与[变更请求](../glossary.md#change-request)模板。选择一项变更验证从[工作项](../glossary.md#issue)到合并的流程。
 2. **质量与交付：** 建立 [Lint](../glossary.md#lint)、构建、测试、安全及发布门禁。验证放行与阻断场景，将同一不可变候选[制品](../glossary.md#artifact)完整[晋级](../glossary.md#promotion)一次。
 3. **长期治理：** 补充契约兼容、迁移和恢复演练、运维文档、[ADR](../glossary.md#adr)、[故障复盘](../glossary.md#incident-review)和[弃用](../glossary.md#deprecation)跟踪。为剩余缺口指定负责人和期限。
 

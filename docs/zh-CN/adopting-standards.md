@@ -16,7 +16,8 @@ git add .gitmodules .standards
 
 ```md
 - Follow the [English development standards](.standards/docs/en/README.md).
-- Follow the [Git branching standards](.standards/docs/en/02-development/git-branching.md) before editing. Check the branch and working tree, use a compliant topic branch, and merge only through a change request with required checks and approvals. Do not edit, commit or push directly on protected branches; administrator access and passing tests do not waive this workflow.
+- Follow the [Git branching standards](.standards/docs/en/02-development/git-branching.md) before editing. Check the branch and working tree, use a compliant topic branch, and merge only through a change request with required technical checks. Do not edit, commit or push directly on protected branches; administrator access and passing tests do not waive this workflow.
+- Recommend independent local [code review](.standards/docs/en/01-governance/review-standards.md) before merge, including a separately invoked Code Review subagent that did not author the change. Give it the current diff and applicable standards, then address its findings. Platform required approvals are 0 under REV-04.
 ```
 
 可使用[纯英文 AGENTS.md 模板](../../templates/repository/AGENTS.md)作为起点。接入检查要求同时直接链接英文入口及 Git 分支模块。升级到此要求时，在更新规范固定提交的同一变更中更新父仓库 AGENTS.md。

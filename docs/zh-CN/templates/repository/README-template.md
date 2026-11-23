@@ -27,6 +27,6 @@
 
 - 组件目录及所有者：
 - 架构、契约与迁移文档：
-- 分支模型、[CI](../../../glossary.md#ci-cd) 检查和必需审批：
+- 分支模型、[CI](../../../glossary.md#ci-cd) 检查和推荐的本地[审查](../../01-governance/review-standards.md)：
 - 版本真源、部署触发条件、[制品库](../../../glossary.md#registry)与[回滚](../../../glossary.md#rollback)文档：
 - 贡献指南、智能体指令与 [Runbook](../../../glossary.md#runbook)：

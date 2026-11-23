@@ -27,6 +27,6 @@ One sentence describing the project, its users and main use cases.
 
 - Component directory map and owners:
 - Architecture, contracts and [migration](../../../glossary.md#migration) docs:
-- Branch model, [CI](../../../glossary.md#ci-cd) checks and required approvals:
+- Branch model, [CI](../../../glossary.md#ci-cd) checks and recommended local [review](../../01-governance/review-standards.md):
 - Release/version source, deploy trigger, [artifact registry](../../../glossary.md#registry) and [rollback](../../../glossary.md#rollback) docs:
 - Contribution guide, agent instructions and [runbook](../../../glossary.md#runbook):
