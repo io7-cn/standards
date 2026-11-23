@@ -11,45 +11,58 @@ jobs:
     if: ${{ !github.event.deleted && github.event.commits[0] != null }}
     runs-on: ubuntu-latest
     steps:
-      - name: Send DingTalk notification
+      - name: Forward GitHub push to DingTalk
         env:
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
-          DINGTALK_SIGNING_SECRET: ${{ secrets.DINGTALK_SIGNING_SECRET }}
-          DINGTALK_KEYWORD: ${{ vars.DINGTALK_KEYWORD }}
         run: |
           python3 - <<'PY'
-          import base64
-          import hmac
           import json
           import os
-          import time
           from urllib.error import HTTPError, URLError
-          from urllib.parse import urlencode
           from urllib.request import Request, urlopen
+          from uuid import uuid4
+
+          def select_fields(source, *names):
+              return {name: source[name] for name in names if name in source}
+
+          def public_actor(actor):
+              return select_fields(actor or {}, 'login', 'name', 'username', 'html_url')
+
+          def commit_payload(commit):
+              data = select_fields(commit, 'id', 'message', 'url', 'timestamp', 'distinct')
+              data['author'] = public_actor(commit['author'])
+              data['committer'] = public_actor(commit['committer'])
+              for field in ('added', 'removed', 'modified'):
+                  data[field] = commit.get(field, [])
+              return data
 
           webhook = os.environ['DINGTALK_WEBHOOK']
           if not webhook:
               raise SystemExit('Set the DINGTALK_WEBHOOK Actions secret.')
 
-          signing_secret = os.environ['DINGTALK_SIGNING_SECRET']
-          if signing_secret:
-              timestamp = str(time.time_ns() // 1_000_000)
-              signature_input = (timestamp + '\n' + signing_secret).encode()
-              signature = hmac.digest(signing_secret.encode(), signature_input, 'sha256')
-              webhook += '&' + urlencode({
-                  'timestamp': timestamp,
-                  'sign': base64.b64encode(signature).decode(),
-              })
+          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as event_file:
+              event = json.load(event_file)
 
-          keyword = os.environ['DINGTALK_KEYWORD'] or '代码推送'
-          repository = os.environ['GITHUB_REPOSITORY']
-          sha = os.environ['GITHUB_SHA']
-          content = f'{keyword}：{repository} 的 main 分支有新提交 {sha[:7]}'
-          payload = {'msgtype': 'text', 'text': {'content': content}}
+          # Forward a GitHub push payload without sending actor email addresses.
+          payload = select_fields(event, 'ref', 'before', 'after', 'compare', 'created', 'deleted', 'forced')
+          repository = event['repository']
+          payload['repository'] = select_fields(
+              repository, 'name', 'full_name', 'html_url', 'url', 'default_branch', 'private',
+          )
+          payload['repository']['owner'] = public_actor(repository['owner'])
+          payload['sender'] = public_actor(event['sender'])
+          payload['pusher'] = public_actor(event['pusher'])
+          payload['commits'] = [commit_payload(commit) for commit in event['commits']]
+          payload['head_commit'] = commit_payload(event['head_commit']) if event['head_commit'] else None
+
           request = Request(
               webhook,
-              data=json.dumps(payload, ensure_ascii=False).encode(),
-              headers={'Content-Type': 'application/json; charset=utf-8'},
+              data=json.dumps(payload).encode(),
+              headers={
+                  'Content-Type': 'application/json',
+                  'X-GitHub-Event': 'push',
+                  'X-GitHub-Delivery': str(uuid4()),
+              },
           )
           try:
               with urlopen(request, timeout=20) as response:
@@ -59,6 +72,6 @@ jobs:
           except (URLError, TimeoutError, ValueError):
               raise SystemExit('Could not read the DingTalk response.') from None
           if str(result.get('errcode')) != '0':
-              raise SystemExit(f'DingTalk rejected the message (errcode={result.get("errcode")}).')
+              raise SystemExit(f'DingTalk rejected the push (errcode={result.get("errcode")}).')
           print('DingTalk accepted the notification.')
           PY
