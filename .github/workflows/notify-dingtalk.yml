@@ -1,0 +1,64 @@
+name: DingTalk push notification
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  notify:
+    if: ${{ !github.event.deleted && github.event.commits[0] != null }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send DingTalk notification
+        env:
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SIGNING_SECRET: ${{ secrets.DINGTALK_SIGNING_SECRET }}
+          DINGTALK_KEYWORD: ${{ vars.DINGTALK_KEYWORD }}
+        run: |
+          python3 - <<'PY'
+          import base64
+          import hmac
+          import json
+          import os
+          import time
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          webhook = os.environ['DINGTALK_WEBHOOK']
+          if not webhook:
+              raise SystemExit('Set the DINGTALK_WEBHOOK Actions secret.')
+
+          signing_secret = os.environ['DINGTALK_SIGNING_SECRET']
+          if signing_secret:
+              timestamp = str(time.time_ns() // 1_000_000)
+              signature_input = (timestamp + '\n' + signing_secret).encode()
+              signature = hmac.digest(signing_secret.encode(), signature_input, 'sha256')
+              webhook += '&' + urlencode({
+                  'timestamp': timestamp,
+                  'sign': base64.b64encode(signature).decode(),
+              })
+
+          keyword = os.environ['DINGTALK_KEYWORD'] or '代码推送'
+          repository = os.environ['GITHUB_REPOSITORY']
+          sha = os.environ['GITHUB_SHA']
+          content = f'{keyword}：{repository} 的 main 分支有新提交 {sha[:7]}'
+          payload = {'msgtype': 'text', 'text': {'content': content}}
+          request = Request(
+              webhook,
+              data=json.dumps(payload, ensure_ascii=False).encode(),
+              headers={'Content-Type': 'application/json; charset=utf-8'},
+          )
+          try:
+              with urlopen(request, timeout=20) as response:
+                  result = json.load(response)
+          except HTTPError as error:
+              raise SystemExit(f'DingTalk returned HTTP {error.code}.') from None
+          except (URLError, TimeoutError, ValueError):
+              raise SystemExit('Could not read the DingTalk response.') from None
+          if str(result.get('errcode')) != '0':
+              raise SystemExit(f'DingTalk rejected the message (errcode={result.get("errcode")}).')
+          print('DingTalk accepted the notification.')
+          PY
