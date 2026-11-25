@@ -2,7 +2,7 @@
 
 [Standards index](README.md) · [简体中文](../zh-CN/contributing.md)
 
-The product engineering team at 艾欧柒（杭州）智能科技有限公司 maintains these standards. Use the repository issue tracker for questions, corrections and proposed changes. Maintainers coordinate review and can assign a backup reviewer through the same tracker. These are engineering requirements, not a representation that every adopting project already satisfies every control.
+These standards are maintained by repository maintainers and contributors. Use the repository issue tracker for questions, corrections and proposed changes. Maintainers coordinate review and can assign a backup reviewer through the same tracker. These are engineering requirements, not a representation that every adopting project already satisfies every control.
 
 For a confidential security concern, first request a private contact channel in an issue without including the sensitive details. Share details only after a maintainer provides that channel. Never post credentials, private service identifiers or personal data in public reports.
 

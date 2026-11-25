@@ -4,7 +4,7 @@
 
 [接入固定版本](adopting-standards.md) · [贡献与问题报告](contributing.md)
 
-本简体中文版与英文版对应。规范适用于艾欧柒（杭州）智能科技有限公司所有产品研发序列，包括开源和内部项目的应用、软件库及配套基础设施。按项目涉及的活动和组件应用相应条款，适用范围跨代码托管平台和 [CI/CD](../glossary.md#ci-cd) 系统。C#、[TypeScript](../glossary.md#ts) 和 [CSS](../glossary.md#css) 的专项要求见[代码开发规范](02-development/coding-standards.md#主要技术栈)。
+本简体中文版与英文版对应。规范适用于采用本规范的团队与项目，覆盖开源和内部项目的应用、软件库及配套基础设施。按项目涉及的活动和组件应用相应条款，适用范围跨代码托管平台和 [CI/CD](../glossary.md#ci-cd) 系统。C#、[TypeScript](../glossary.md#ts) 和 [CSS](../glossary.md#css) 的专项要求见[代码开发规范](02-development/coding-standards.md#主要技术栈)。
 
 **[变更请求](../glossary.md#change-request)**是用于审查并合并拟议变更的记录，例如 [Pull Request](../glossary.md#change-request) 或 [Merge Request](../glossary.md#change-request)。**[工作项](../glossary.md#issue)**（[Issue](../glossary.md#issue)）可以记录在独立的跟踪系统中。
 
