@@ -4,7 +4,7 @@
 
 [Adopt a pinned revision](adopting-standards.md) · [Contribute and report issues](contributing.md)
 
-This is the normative English edition for all product engineering at 艾欧柒（杭州）智能科技有限公司. It applies to open-source and internal projects, including applications, libraries and the infrastructure that supports them. Apply each requirement where the corresponding activity or component exists, across code hosting platforms and [CI/CD](../glossary.md#ci-cd) systems. The [coding standards](02-development/coding-standards.md#primary-technology-stack) define the profiles for C#, [TypeScript](../glossary.md#ts) and [CSS](../glossary.md#css).
+This is the normative English edition of the software development standards for adopting teams and projects. It applies to open-source and internal projects, including applications, libraries and the infrastructure that supports them. Apply each requirement where the corresponding activity or component exists, across code hosting platforms and [CI/CD](../glossary.md#ci-cd) systems. The [coding standards](02-development/coding-standards.md#primary-technology-stack) define the profiles for C#, [TypeScript](../glossary.md#ts) and [CSS](../glossary.md#css).
 
 A **[change request](../glossary.md#change-request)** is the record used to review and merge a proposed change (for example, a [pull request](../glossary.md#change-request) or [merge request](../glossary.md#change-request)). An **issue** is a tracked [work item](../glossary.md#issue) and may live in a separate tracker.
 
